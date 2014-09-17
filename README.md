@@ -45,7 +45,7 @@ make
 
 Software Version Guidelines: [Semantic Versioning](http://semver.org)
 
-Compare & parse semver version strings: [godoc go-semver](http://godoc.org/code.google.com/p/go-semver/version) [code: go-semver](https://code.google.com/p/go-semver/) 
+Compare & parse semver version strings: [godoc go-semver](http://godoc.org/code.google.com/p/go-semver/version), [code: go-semver](https://code.google.com/p/go-semver/) 
 #### Example
 
 ```go
