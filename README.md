@@ -8,12 +8,11 @@ git tag -a
 # View the git tag: 
 git describe --tags --long
 
-# Install of go install execute:
+# Instead of "go install" execute:
 make
-
-# 
-
-# Instead of go clean execute:
+# Run "go install" and strip to remove debug symbols:
+make strip
+# Instead of "go clean" execute:
 make clean
 ```
 
