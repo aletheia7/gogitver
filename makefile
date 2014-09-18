@@ -13,15 +13,20 @@ all : go_install
 go_install : remove_older_describe_go $(git_describe_go) 
 	go install $(verbose_go_cmds) $(package)
 
+# go install followed by strip to remove symbols
 strip : all
 	$(shell strip $(strip_options) `go env GOPATH`/bin/$(package))
 
+# make git_describe_go with git tag
 $(git_describe_go) :
 	$(shell $(go_code) > $@)
 
+# Compare git tag with current tag
+# If git tag is newer than existing tag, remove git_describe_go and remake 
 remove_older_describe_go : $(git_describe_go) force 
-	@echo $(shell $(go_code) | diff -q - $(git_describe_go) >/dev/null ; if [ $$? -ne 0 ] ; then (rm $(git_describe_go) ; printf "new git tag: %s\n" `$(git_cmd)`;  $(MAKE) $(MAKEFLAGS) $(git_describe_go) > /dev/null ) ; fi)
+	@printf '%s' $(shell $(go_code) | diff -q - $(git_describe_go) >/dev/null ; if [ $$? -ne 0 ] ; then (rm $(git_describe_go) ; printf "new git tag: %s\n" `$(git_cmd)`;  $(MAKE) $(MAKEFLAGS) $(git_describe_go) > /dev/null ) ; fi)
 
+# git clean
 .PHONY : clean
 clean :
 	go clean -i $(verbose_go_cmds) $(package)
