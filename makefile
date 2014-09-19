@@ -24,7 +24,7 @@ $(git_describe_go) :
 # Compare git tag with current tag
 # If git tag is newer than existing tag, remove git_describe_go and remake 
 remove_older_describe_go : $(git_describe_go) force 
-	@printf '%s' $(shell $(go_code) | diff -q - $(git_describe_go) >/dev/null ; if [ $$? -ne 0 ] ; then (rm $(git_describe_go) ; printf "new git tag: %s\n" `$(git_cmd)`;  $(MAKE) $(MAKEFLAGS) $(git_describe_go) > /dev/null ) ; fi)
+	@export data=$(shell $(go_code) | diff -q - $(git_describe_go) >/dev/null ; if [ $$? -ne 0 ] ; then (rm $(git_describe_go) ; printf "'new git tag: %s\n'" `$(git_cmd)`; $(MAKE) $(MAKEFLAGS) $(git_describe_go) > /dev/null ) ; fi) ; printf "$$data" ; ([ "$${#data}" -eq 0 ] || echo)
 
 # git clean
 .PHONY : clean
