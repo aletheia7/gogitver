@@ -7,15 +7,18 @@ strip_options = --strip-all
 package = $(notdir $(PWD))
 git_describe_go = gogitver/git_describe.go
 go_code = printf "package gogitver\nconst git_describe = \`%s\`\\n" `$(git_cmd)`
+ifeq ($(MAKECMDGOALS), strip)
+go_no_debug = -ldflags '-w'
+endif
 
 all : go_install
 
-go_install : remove_older_describe_go $(git_describe_go) 
-	go install $(verbose_go_cmds) $(package)
+go_install : remove_older_describe_go
+	go install $(go_no_debug) $(verbose_go_cmds) $(package)
 
 # go install followed by strip to remove symbols
-strip : all
-	$(shell strip $(strip_options) `go env GOPATH`/bin/$(package))
+strip : clean go_install
+	strip $(strip_options) ../../bin/$(package)
 
 # make git_describe_go with git tag
 $(git_describe_go) :
@@ -29,7 +32,7 @@ remove_older_describe_go : $(git_describe_go) force
 # git clean
 .PHONY : clean
 clean :
-	go clean -i $(verbose_go_cmds) $(package)
+	go clean -i $(verbose_go_cmds) $(package)/...
 
 .PHONY : force
 force :
