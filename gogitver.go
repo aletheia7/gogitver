@@ -25,14 +25,17 @@
 //
 package gogitver
 
-import "strings"
+import (
+	`regexp`
+)
 
 // Tag returns a git tag
 //
-// Tag is the left hand side of -g
-// Example: 1.0.2
+// Tag is the left hand side of 1.0.2-α-0-g1234567
+// Example: 1.0.2-α
 func Tag() string {
-	return strings.Split(git_describe, "-")[0]
+	re := regexp.MustCompile(`^(.+)-\d+-g[[:xdigit:]]{7}$`)
+	return re.FindStringSubmatch(git_describe)[1]
 }
 
 // Git returns a "git describe --tags --long"
