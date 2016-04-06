@@ -5,7 +5,7 @@ git_cmd = git describe --tags --long
 verbose_go_cmds = -v
 strip_options = --strip-all
 package = $(notdir $(PWD))
-git_describe_go = gogitver/git_describe.go
+git_describe_go = $(dir $(realpath $(lastword $(MAKEFILE_LIST))))git_describe.go
 go_code = printf "package gogitver\nconst git_describe = \`%s\`\\n" `$(git_cmd)`
 ifeq ($(MAKECMDGOALS), strip)
 go_no_debug = -ldflags '-w'
