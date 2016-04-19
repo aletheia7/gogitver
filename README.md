@@ -39,7 +39,7 @@ Run make:
 make
 ```
 #### Documentation
-[godoc gogitver](http://godoc.org/github.com/aletheia7/gogitver)
+[![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/gogitver) 
 
 [GNUMake](https://www.gnu.org/software/make/manual/make.html)
 
