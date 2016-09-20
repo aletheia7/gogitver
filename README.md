@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/gogitver) 
+
 #### gogitver 
 A go package that inserts a git tag into your binary. Uses make to efficiently 
 compile your go application when the git tag changes. Other source code changes
@@ -38,8 +40,6 @@ Run make:
 ```bash
 make
 ```
-#### Documentation
-[![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/gogitver) 
 
 [GNUMake](https://www.gnu.org/software/make/manual/make.html)
 
@@ -69,4 +69,9 @@ func main() {
 1.0.7
 ```
 
-![LGPL](http://www.gnu.org/graphics/lgplv3-147x51.png)
+#### License 
+
+Use of this source code is governed by a BSD-2-Clause license that can be found
+in the LICENSE file.
+
+[![BSD-2-Clause License](osi_logo_100X133_90ppi_0.png)](https://opensource.org/)
