@@ -1,6 +1,6 @@
 [![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/gogitver) 
 
-#### gogitver and [mage](https://github.com/magefile/mage)
+#### gogitver and [mage (go make)](https://github.com/magefile/mage)
 A go package that inserts a git tag into your binary. Uses mage to efficiently 
 compile your go application when the git tag changes. Other source code changes
 will still trigger a compile. The git version/tag is created beforehand with:
