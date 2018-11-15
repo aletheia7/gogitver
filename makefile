@@ -16,10 +16,6 @@ all : go_install
 go_install : remove_older_describe_go
 	go install $(go_no_debug) $(verbose_go_cmds) $(package)
 
-# go install followed by strip to remove symbols
-strip : clean go_install
-	strip $(strip_options) ../../bin/$(package)
-
 # make git_describe_go with git tag
 $(git_describe_go) :
 	$(shell $(go_code) > $@)
