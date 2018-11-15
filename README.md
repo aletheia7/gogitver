@@ -1,6 +1,45 @@
 [![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/gogitver) 
 
-#### gogitver 
+#### gogitver and [mage](https://github.com/magefile/mage)
+A go package that inserts a git tag into your binary. Uses mage to efficiently 
+compile your go application when the git tag changes. Other source code changes
+will still trigger a compile. The git version/tag is created beforehand with:
+```bash
+git tag -a
+
+# View the git tag: 
+git describe --tags --long
+
+# Instead of "go install" execute:
+mage
+```
+
+#### Install and [mage](https://github.com/magefile/mage)
+gogitver must be installed as a package under your application main
+directory. E.g. if your application resides under ~/go/src/app, 
+gogitver must be installed under ~/go/src/app/gogitver. ~/go/src/app/vendor/gogitver
+is preferred.
+
+```bash
+# Example
+mkdir ~/go/src/app/vendor/gogitver
+cd ~/go/src/app
+git clone --depth 1 https://github.com/aletheia7/gogitver.git vendor/gogitver
+rm -fr vendor/gogitver/.git
+# link mage_gogitver.go 
+ln -s vendor/gogitver/mage_gogitver.go .
+Add a mg.Dep(Gogitver) to your main magefile.go that should reside under ~/go/src/app .
+```
+Create a git tag:
+```bash
+git tag -a 1.0.7
+```
+Run mage:
+```bash
+mage
+```
+
+#### gogitver and [GNUMake](https://www.gnu.org/software/make/manual/make.html)
 A go package that inserts a git tag into your binary. Uses make to efficiently 
 compile your go application when the git tag changes. Other source code changes
 will still trigger a compile. The git version/tag is created beforehand with:
@@ -18,19 +57,20 @@ make strip
 make clean
 ```
 
-#### Install 
+#### Install and [GNUMake](https://www.gnu.org/software/make/manual/make.html)
 gogitver must be installed as a package under your application main
 directory. E.g. if your application resides under ~/go/src/app, 
-gogitver must be installed under ~/go/src/app/gogitver.
+gogitver must be installed under ~/go/src/app/gogitver. ~/go/src/app/vendor/gogitver
+is preferred.
 
 ```bash
 # Example
-mkdir ~/go/src/app/gogitver
+mkdir ~/go/src/app/vendor/gogitver
 cd ~/go/src/app
-git clone --depth 1 https://github.com/aletheia7/gogitver.git
-rm -fr gogitver/.git
-# Copy makefile
-cp gogitver/makefile .
+git clone --depth 1 https://github.com/aletheia7/gogitver.git vendor/gogitver
+rm -fr vendor/gogitver/.git
+# link makefile
+ln -s vendor/gogitver/makefile .
 ```
 Create a git tag:
 ```bash
