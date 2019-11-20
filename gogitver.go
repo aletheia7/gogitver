@@ -21,7 +21,7 @@ import (
 // Tag is the left hand side of 1.0.2-α-0-g1234567
 // Example: 1.0.2-α
 func Tag() string {
-	re := regexp.MustCompile(`^(.+)-\d+-g[[:xdigit:]]{7}$`)
+	re := regexp.MustCompile(`^(.+)-\d+-g[[:xdigit:]]+$`)
 	return re.FindStringSubmatch(git_describe)[1]
 }
 
